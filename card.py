@@ -41,3 +41,7 @@ class Card:
     def __repr__(self):
         return f"Rank:={self.rank} Suit:={self.suit}"
     
+    def compare(self, other_card):
+        ''' 0 if equal, negative if other is bigger, positive if self is bigger '''
+        return Card.RANK_VALUES[self.rank]-Card.RANK_VALUES[other_card.rank]
+    
