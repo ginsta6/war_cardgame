@@ -16,7 +16,7 @@ class Deck:
     def add_card(self, card:Card):
         self.cards.append(card)
 
-    def remove_card(self):
+    def remove_card(self) -> Card:
         return self.cards.pop()
     
     def shuffle_deck(self):
