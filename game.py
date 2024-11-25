@@ -12,8 +12,10 @@ class Game:
             self._round += 1
             if self._round > self._max_rounds:
                 break
-            print(f"Score:\nPlayer- {len(self.player.cards)} : {len(self.cpu.cards)} -CPU")
             if self.game_round():
+                break
+            print(f"Score:\nPlayer - {len(self.player.cards)} : {len(self.cpu.cards)} - CPU")
+            if not self.continue_game():
                 break
         print(f"{self.get_game_winner()} has won the game!")
 
@@ -44,6 +46,19 @@ class Game:
         else:
             return True
 
+    def continue_game(self):
+        while True:
+            try:
+                user_input = input("Press 'p' to play a card or 'q' to quit: ")
+                if user_input.lower() == 'p':
+                    return True
+                elif user_input.lower() == 'q':
+                    return False
+                else:
+                    raise ValueError
+            except ValueError:
+                print("Invalid input! Please try again.")
+
     def declare_winner(self, player_pile: list[Card], cpu_pile: list[Card]):
         outcome = player_pile[-1].compare(cpu_pile[-1])
         if outcome == 0:
@@ -64,7 +79,7 @@ class Game:
         for _ in range(1):
             try:
                 player_pile.append(self.player.remove_card())
-                cpu_pile.append(self.player.remove_card())
+                cpu_pile.append(self.cpu.remove_card())
             except IndexError:
                 print("Not enough cards for a war! Game over!")
                 return
