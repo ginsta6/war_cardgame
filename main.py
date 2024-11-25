@@ -6,6 +6,8 @@ def main():
         if len(sys.argv) != 3:
             sys.exit("\033[95m Specify deck size (F/H) and round quantity \033[0m")
         else:
+            if not sys.argv[2].isdigit():
+                sys.exit("\033[95m Round quantity must be a positive number \033[0m")
             match sys.argv[1].lower():
                 case "f":
                     mygame = Game(True, int(sys.argv[2]))
